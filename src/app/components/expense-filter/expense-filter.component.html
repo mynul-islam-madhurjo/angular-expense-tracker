@@ -1,0 +1,27 @@
+<div class="filter-container">
+  <div class="date-filters">
+    <div class="filter-group">
+      <label for="startDate">From:</label>
+      <input
+        type="date"
+        id="startDate"
+        [(ngModel)]="dateRange.startDate"
+        (ngModelChange)="onDateRangeChange()"
+        class="form-control">
+    </div>
+
+    <div class="filter-group">
+      <label for="endDate">To:</label>
+      <input
+        type="date"
+        id="endDate"
+        [(ngModel)]="dateRange.endDate"
+        (ngModelChange)="onDateRangeChange()"
+        class="form-control">
+    </div>
+  </div>
+
+  <button (click)="clearFilter()" class="clear-button">
+    Clear Filter
+  </button>
+</div>

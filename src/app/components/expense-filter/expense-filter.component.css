@@ -1,0 +1,46 @@
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.date-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  color: #F29F58;
+  font-size: 0.9em;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #AB4459;
+  border-radius: 4px;
+  background-color: #1B1833;
+  color: white;
+}
+
+.clear-button {
+  width: 100%;
+  padding: 8px;
+  background-color: #F29F58;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clear-button:hover {
+  background-color: #AB4459;
+}

@@ -1,12 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface Expense {
-  amount: number;
-  date: Date;
-  category: string;
-  description: string;
-}
+import { Expense } from '../../models/expense.interface';
 
 @Component({
   selector: 'app-expense-summary',
@@ -16,7 +10,6 @@ interface Expense {
   styleUrl: './expense-summary.component.css'
 })
 export class ExpenseSummaryComponent {
-  // Receive expenses from parent component
   @Input() expenses: Expense[] = [];
 
   calculateTotal(): number {
@@ -24,14 +17,14 @@ export class ExpenseSummaryComponent {
   }
 
   calculateByCategory(): {category: string, total: number}[] {
-    const categoryTotals = new Map<string, number>();
+    const categoryMap = new Map<string, number>();
 
     this.expenses.forEach(expense => {
-      const currentTotal = categoryTotals.get(expense.category) || 0;
-      categoryTotals.set(expense.category, currentTotal + expense.amount);
+      const currentTotal = categoryMap.get(expense.category) || 0;
+      categoryMap.set(expense.category, currentTotal + expense.amount);
     });
 
-    return Array.from(categoryTotals.entries())
+    return Array.from(categoryMap.entries())
       .map(([category, total]) => ({
         category,
         total

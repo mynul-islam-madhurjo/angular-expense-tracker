@@ -1,56 +1,130 @@
 .expense-form {
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  background-color: #1B1833;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+h2 {
+  color: #F29F58;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
 
 .form-group {
-    margin-bottom: 15px;
+  margin-bottom: 1.2rem;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
+label {
+  display: block;
+  color: #F29F58;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
 .form-control {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #441752;
+  border-radius: 8px;
+  background-color: white;
+  color: #1B1833;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.form-control:focus {
+  outline: none;
+  border-color: #F29F58;
+  box-shadow: 0 0 0 3px rgba(242, 159, 88, 0.2);
 }
 
-button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
+select.form-control {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23441752' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+  background-size: 1.2rem;
+  padding-right: 2.5rem;
 }
 
-.button-group {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.cancel-button {
-  background-color: #6c757d;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
+/* Date input styling */
+input[type="date"] {
+  position: relative;
   cursor: pointer;
 }
 
-.cancel-button:hover {
-  background-color: #5a6268;
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  filter: invert(60%) sepia(11%) saturate(1000%) hue-rotate(314deg) brightness(90%) contrast(97%);
+}
+
+button {
+  background-color: #F29F58;
+  color: #1B1833;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  width: auto;
+  min-width: 150px;
+}
+
+button:hover:not(:disabled) {
+  background-color: #AB4459;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+button:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Placeholder styling */
+::placeholder {
+  color: #666;
+  opacity: 0.7;
+}
+
+/* Error state */
+.form-control.ng-invalid.ng-touched {
+  border-color: #AB4459;
+}
+
+/* Success state */
+.form-control.ng-valid.ng-touched {
+  border-color: #4CAF50;
+}
+
+/* Add responsive design */
+@media (max-width: 480px) {
+  .expense-form {
+    padding: 1.5rem;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .form-control {
+    font-size: 16px; /* Prevents zoom on mobile */
+  }
 }

@@ -1,1 +1,49 @@
+<div class="app-container">
+  <h1>Expense Tracker</h1>
 
+  <div class="main-content">
+    <div class="left-panel">
+      <div class="form-section">
+        <app-expense-form
+          [expenseToEdit]="selectedExpense"
+          (expenseAdded)="onExpenseAdded($event)"
+          (expenseUpdated)="onExpenseUpdated($event)">
+        </app-expense-form>
+      </div>
+
+      <div class="filter-section">
+        <h2>Filter Expenses</h2>
+        <app-expense-filter
+          (dateRangeChanged)="onDateRangeChanged($event)">
+        </app-expense-filter>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="list-section">
+        <h2>Expense List</h2>
+        <div class="expense-list">
+          @for (expense of filteredExpenses; track expense.id) {
+            <div class="expense-item">
+              <div class="expense-details">
+                <span class="expense-amount">${{ expense.amount }}</span>
+                <span class="expense-category">{{ expense.category }}</span>
+                <span class="expense-date">{{ expense.date | date:'shortDate' }}</span>
+                <span class="expense-description">{{ expense.description }}</span>
+              </div>
+              <div class="expense-actions">
+                <button class="edit-btn" (click)="editExpense(expense)">Edit</button>
+                <button class="delete-btn" (click)="deleteExpense(expense.id)">Delete</button>
+              </div>
+            </div>
+          }
+          @if (filteredExpenses.length === 0) {
+            <p class="no-expenses">No expenses found for selected date range</p>
+          }
+        </div>
+      </div>
+
+      <app-expense-summary [expenses]="filteredExpenses"></app-expense-summary>
+    </div>
+  </div>
+</div>

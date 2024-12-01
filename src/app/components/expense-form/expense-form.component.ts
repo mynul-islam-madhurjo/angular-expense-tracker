@@ -1,14 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface Expense {
-  id?: number;
-  amount: number;
-  date: Date;
-  category: string;
-  description: string;
-}
+import { Expense, NewExpense } from '../../models/expense.interface';
 
 @Component({
   selector: 'app-expense-form',
@@ -18,15 +11,11 @@ interface Expense {
   styleUrl: './expense-form.component.css'
 })
 export class ExpenseFormComponent implements OnChanges {
-  // Input to receive expense to edit from parent
   @Input() expenseToEdit: Expense | null = null;
-
-  // Output events for adding and updating expenses
-  @Output() expenseAdded = new EventEmitter<Expense>();
+  @Output() expenseAdded = new EventEmitter<NewExpense>();
   @Output() expenseUpdated = new EventEmitter<Expense>();
 
-  // Form model
-  expense: Expense = {
+  expense: NewExpense = {
     amount: 0,
     date: new Date(),
     category: '',
@@ -35,42 +24,31 @@ export class ExpenseFormComponent implements OnChanges {
 
   categories: string[] = ['Food', 'Travel', 'Shopping', 'Bills', 'Other'];
 
-  // This lifecycle hook runs when @Input properties change
   ngOnChanges(changes: SimpleChanges) {
     if (changes['expenseToEdit'] && this.expenseToEdit) {
-      // Copy the expense to edit into the form
-      this.expense = {
-        ...this.expenseToEdit,
-        // Ensure date is a Date object
-        date: new Date(this.expenseToEdit.date)
-      };
+      this.expense = { ...this.expenseToEdit };
     }
   }
 
   onSubmit() {
     if (this.expenseToEdit) {
-      // If we're editing, emit update event
       this.expenseUpdated.emit({
         ...this.expense,
         id: this.expenseToEdit.id
-      });
+      } as Expense);
     } else {
-      // If we're adding new, emit add event
       this.expenseAdded.emit(this.expense);
     }
 
-    // Reset form
     this.resetForm();
   }
 
   cancelEdit() {
-    // Clear the edit mode and reset form
     this.expenseToEdit = null;
     this.resetForm();
   }
 
   private resetForm() {
-    // Reset to initial state
     this.expense = {
       amount: 0,
       date: new Date(),

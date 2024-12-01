@@ -1,8 +1,8 @@
 <div class="summary-card">
 
-  <div class="total-section">
+  <div class="total-expenses">
     <h2>Total Expenses</h2>
-    <div class="total-amount">${{ calculateTotal() }}</div>
+    <div class="total-amount">{{ calculateTotal() }}</div>
   </div>
 
 
@@ -14,7 +14,7 @@
         @for (category of calculateByCategory(); track category.category) {
           <div class="category-item">
             <span class="category-name">{{ category.category }}</span>
-            <span class="category-amount">₹{{ category.total }}</span>
+            <span class="category-amount">${{ category.total }}</span>
           </div>
         }
       </div>
