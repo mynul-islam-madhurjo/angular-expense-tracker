@@ -1,0 +1,25 @@
+<div class="summary-card">
+
+  <div class="total-section">
+    <h2>Total Expenses</h2>
+    <div class="total-amount">${{ calculateTotal() }}</div>
+  </div>
+
+
+  <div class="category-section">
+    <h2>Expenses by Category</h2>
+
+    @if (expenses.length > 0) {
+      <div class="category-list">
+        @for (category of calculateByCategory(); track category.category) {
+          <div class="category-item">
+            <span class="category-name">{{ category.category }}</span>
+            <span class="category-amount">₹{{ category.total }}</span>
+          </div>
+        }
+      </div>
+    } @else {
+      <p class="no-expenses">No expenses recorded yet</p>
+    }
+  </div>
+</div>

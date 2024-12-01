@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 interface Expense {
-  id?: number;
   amount: number;
   date: Date;
   category: string;
-  description?: string;
+  description: string;
 }
 
 @Component({
@@ -18,6 +17,10 @@ interface Expense {
   styleUrl: './expense-form.component.css'
 })
 export class ExpenseFormComponent {
+  // Create event emitter to send data to parent
+  @Output() expenseAdded = new EventEmitter<Expense>();
+
+  // Model for the form
   expense: Expense = {
     amount: 0,
     date: new Date(),
@@ -28,6 +31,15 @@ export class ExpenseFormComponent {
   categories: string[] = ['Food', 'Travel', 'Shopping', 'Bills', 'Other'];
 
   onSubmit() {
-    console.log('Form submitted:', this.expense);
+    // Emit the expense to parent component
+    this.expenseAdded.emit({...this.expense});
+
+    // Reset form
+    this.expense = {
+      amount: 0,
+      date: new Date(),
+      category: '',
+      description: ''
+    };
   }
 }
